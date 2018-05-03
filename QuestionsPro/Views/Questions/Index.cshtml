@@ -1,0 +1,26 @@
+﻿@using QuestionsPro.Models;
+@model Dictionary<int, String>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Questions</h2>
+<div class="btn btn-default">
+    @Html.ActionLink("Refresh", "Index")
+   
+</div>
+<table>
+
+    @foreach(KeyValuePair<int,string> i in Model)
+{
+        <tr>
+            <td>
+                @Html.ActionLink(i.Value, "Show", new { target = "_blank",id=i.Key });
+            </td>
+        </tr>
+        
+}
+
+</table>
+

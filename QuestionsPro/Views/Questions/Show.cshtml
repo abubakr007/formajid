@@ -1,0 +1,99 @@
+﻿@using StackExchange.StacMan
+@model StackExchange.StacMan.Question
+@{
+    ViewBag.Title = "Show";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>@Model.Title</h1>
+<div class="row rounded" style="background-color:#ccc">
+    @Html.Raw(Model.Body)
+</div>
+<table style="width:100%;">
+    <tr style="width:100%;">
+        <td>
+            <div class="row">
+                <b>Tag:</b>
+                @foreach (String t in Model.Tags)
+                {
+                    <div style="display:inline;border:1px solid #808080;background-color:#ccc" >
+                        @t
+                    </div>
+                }
+            </div>
+            <div>
+                <b>Creation Date:</b>@Model.CreationDate
+            </div>
+        </td>
+        <td>
+            <img src="@Model.Owner.ProfileImage" style="width:64px;height:64px;" /> <!-- User Pic -->
+            <br />
+            @Model.Owner.DisplayName;
+        </td>
+    </tr>
+</table>
+<div>
+    @if (Model.Comments != null)
+    {
+        <div class="row">
+            Comments:
+            @foreach (StackExchange.StacMan.Comment com in Model.Comments)
+            {
+                <div>
+                    @com.Body
+                </div>
+                <div>
+                    @com.Owner.DisplayName
+                    <br />
+                    @com.CreationDate
+                </div>
+            }
+
+        </div>
+    }
+</div>
+	<div>
+    @if (Model.Answers != null)
+    {
+        <div class="row">
+            <h2>Answers:</h2>
+            @foreach (StackExchange.StacMan.Answer ans in Model.Answers)
+            {
+                <table>
+                    <tr>
+                        <td>
+                            @ans.Score
+                        </td>
+                        <td>
+                            <div>
+                                <div class="row rounded">
+                                    @ans.Body
+                                </div>
+                            </div>
+                            <div class="row">
+                                @ans.Owner.DisplayName
+                                <br />
+                                @ans.CreationDate
+                            </div>
+                            <div>
+                                @foreach(StackExchange.StacMan.Comment com in ans.Comments)
+                                {
+                                    @com.Body
+                                    <br />
+                                    @com.Owner.DisplayName
+                                }
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                
+                
+            }
+
+        </div>
+    }
+</div>
+
+
+
+
